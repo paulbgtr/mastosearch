@@ -1,0 +1,33 @@
+# Search component 
+
+A component that provides core functionality of the app.
+
+It uses ref to focus on the input field when the component is mounted.
+
+## Props
+
+`searchExample` - A string that represents the search example. It is used in the placeholder of the search input.
+
+## Usage
+
+### Basic Usage
+
+```js
+import { Search } from './Search';
+
+<Search searchExample="A general Mastodon instance" />
+```
+
+### Utilizing Random Search Example
+
+The component is intended to be used with a random search example. The `randomSearchExample` function is used to get a random search example from the `searchExamples` array.
+
+```js
+import { Search } from './Search';
+import { searchExamples } from "@/data/searchExamples"; // for predefined search examples
+import { randomSearchExample } from "@/lib/utils"; // a function that returns a random search example of the searchExamples array
+
+const searchExample = randomSearchExample(searchExamples);
+
+<Search searchExample={searchExample} />
+```
