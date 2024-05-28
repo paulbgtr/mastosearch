@@ -5,6 +5,10 @@ export const getCategoryFromChatGpt = async (
   query: string,
   categories: string[]
 ) => {
+  if (!query || query.trim() === "") {
+    throw new Error("Query is empty");
+  }
+
   const fetchResponse = await fetch(
     "https://api.openai.com/v1/chat/completions",
     {
@@ -21,7 +25,9 @@ export const getCategoryFromChatGpt = async (
             role: "user",
             content: `Based on this user input: '${query}', suggest a single relevant category from this list: [${categories.join(
               ", "
-            )}]. Return only one word from the list that best matches the user input. Don't change the words and return a single word as it is.`,
+            )}]. Return only one word from the list that best matches the user input. Don't change the words and return a single word as it is.
+                If the query doesn't match any category, return 'not-found'.
+            `,
           },
         ],
       }),
@@ -29,5 +35,11 @@ export const getCategoryFromChatGpt = async (
   );
 
   const jsonResponse = (await fetchResponse.json()) as GenericResponse;
-  return jsonResponse.choices[0].message.content.toLowerCase();
+  const category = jsonResponse.choices[0].message.content.toLowerCase();
+
+  if (!categories.includes(category)) {
+    throw new Error("Category not found");
+  }
+
+  return category;
 };
