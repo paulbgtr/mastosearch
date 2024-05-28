@@ -1,4 +1,5 @@
 import type { GenericResponse } from "../types/GenericResponse";
+import { NotFoundError } from "../utils/CustomError";
 
 /**
  * A function that uses the OpenAI Chat API to get a category from a user query.
@@ -6,8 +7,7 @@ import type { GenericResponse } from "../types/GenericResponse";
  *
  * The prompt basically asks the AI to suggest a single relevant category from a list of categories. If the query doesn't match any category, it returns 'not-found'.
  *
- * If the query is empty, it throws an error.
- * If the category is not found, it throws an error.
+ * If the category is not found, it throws a `NotFoundError`.
  *
  * @param apiKey
  * @param query
@@ -19,10 +19,6 @@ export const getCategoryFromChatGpt = async (
   query: string,
   categories: string[]
 ) => {
-  if (!query || query.trim() === "") {
-    throw new Error("Query is empty");
-  }
-
   const fetchResponse = await fetch(
     "https://api.openai.com/v1/chat/completions",
     {
@@ -52,7 +48,7 @@ export const getCategoryFromChatGpt = async (
   const category = jsonResponse.choices[0].message.content.toLowerCase();
 
   if (!categories.includes(category)) {
-    throw new Error("Category not found");
+    throw new NotFoundError("Category not found");
   }
 
   return category;
