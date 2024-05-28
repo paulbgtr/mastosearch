@@ -1,5 +1,19 @@
 import type { GenericResponse } from "../types/GenericResponse";
 
+/**
+ * A function that uses the OpenAI Chat API to get a category from a user query.
+ * It uses a custom prompt to get a single category from a list of categories.
+ *
+ * The prompt basically asks the AI to suggest a single relevant category from a list of categories. If the query doesn't match any category, it returns 'not-found'.
+ *
+ * If the query is empty, it throws an error.
+ * If the category is not found, it throws an error.
+ *
+ * @param apiKey
+ * @param query
+ * @param categories
+ * @returns A string that represents a category of Mastodon instances
+ */
 export const getCategoryFromChatGpt = async (
   apiKey: string,
   query: string,
