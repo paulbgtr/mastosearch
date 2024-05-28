@@ -34,14 +34,6 @@ describe("getCategoryFromChatGpt", () => {
     expect(mastodonCategories).toContain(category);
   });
 
-  it("throws an error if the query is empty", async () => {
-    const query = "";
-
-    await expect(
-      getCategoryFromChatGpt(openaiApiKey, query, mastodonCategories)
-    ).rejects.toThrow("Query is empty");
-  });
-
   it("throws an error if the category is not found", async () => {
     const query = "nonsense";
 

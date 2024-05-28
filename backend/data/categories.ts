@@ -1,3 +1,6 @@
+/**
+ * List of categories that correspond to Mastodon instances.
+ */
 export const categories = [
   "tech",
   "lgbt",
