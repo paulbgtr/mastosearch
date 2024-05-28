@@ -1,7 +1,8 @@
-import { Request, Response } from "express";
+import { Request, Response, Next } from "express";
 import { categories } from "../data/categories";
 import { getCategoryFromChatGpt } from "../api/chatGptApi";
 import { getInstancesByCategory } from "../api/mastodonInstancesApi";
+import { BadRequestError } from "../utils/CustomError";
 
 const openaiApiKey = process.env.OPENAI_API_KEY;
 const mastodonInstancesApiKey = process.env.MASTODON_INSTANCES_API_KEY;
@@ -10,11 +11,24 @@ if (!openaiApiKey || !mastodonInstancesApiKey) {
   throw new Error("API keys not provided");
 }
 
-export const searchHandler = async (req: Request, res: Response) => {
+/**
+ * A handler that searches for Mastodon instances based on a user query.
+ *
+ * If the query is not provided, it throws a `BadRequestError`.
+ *
+ * @param req
+ * @param res
+ * @returns A list of Mastodon instances that belong to a specific category.
+ */
+export const searchHandler = async (
+  req: Request,
+  res: Response,
+  next: Next
+) => {
   const { query } = req.body;
 
   if (!query) {
-    return res.status(400).json({ error: "Query not provided" });
+    return next(new BadRequestError("Query not provided"));
   }
 
   try {
@@ -23,7 +37,6 @@ export const searchHandler = async (req: Request, res: Response) => {
       query,
       categories
     );
-    console.log(category);
 
     const instances = await getInstancesByCategory(
       mastodonInstancesApiKey,
@@ -31,7 +44,6 @@ export const searchHandler = async (req: Request, res: Response) => {
     );
     res.json({ instances });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Internal server error" });
+    next(err);
   }
 };
