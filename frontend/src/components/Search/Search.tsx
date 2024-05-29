@@ -2,7 +2,11 @@ import { Input } from "@/components/ui/input";
 import { useState, useRef, useEffect } from "react";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
-import { useFetchMastodonInstances } from "@/hooks/useFetchMastodonInstances";
+import { useMutation } from "@tanstack/react-query";
+import type { MastodonInstance } from "@/types/MastodonInstance";
+import { fetchMastodonInstances } from "@/api/fetchMastodonInstances";
+import { MastodonInstanceList } from "../MastodonInstanceList/MastodonInstanceList";
+import { filterInstances } from "@/lib/utils";
 
 const Header = () => {
   return (
@@ -17,22 +21,29 @@ const Header = () => {
 
 export const Search = ({ searchExample }: { searchExample: string }) => {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<{ id: string; name: string }[]>([]);
+  const [results, setResults] = useState<MastodonInstance[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
 
-  const mutation = useFetchMastodonInstances();
+  const mutation = useMutation({
+    mutationFn: fetchMastodonInstances,
+    onSuccess: (data) => {
+      const { instances } = data;
+
+      const filteredInstances = filterInstances(instances);
+      setResults(filteredInstances);
+    },
+    onError: (error) => {
+      console.error("Error fetching data:", error);
+    },
+  });
 
   const handleSubmit = () => {
     if (query.length > 0) {
-      mutation.mutate(query, {
-        onSuccess: (data) => {
-          setResults(data);
-        },
-      });
+      mutation.mutate(query);
     }
   };
 
@@ -57,16 +68,7 @@ export const Search = ({ searchExample }: { searchExample: string }) => {
       </div>
       {mutation.isPending && <p>Loading...</p>}
       {mutation.isError && <p>Error fetching data</p>}
-      {mutation.isSuccess && (
-        <ul>
-          {results.map((result) => (
-            <li key={result.id}>
-              <p>ID: {result.id}</p>
-              <p>Name: {result.name}</p>
-            </li>
-          ))}
-        </ul>
-      )}
+      {mutation.isSuccess && <MastodonInstanceList instances={results} />}
     </article>
   );
 };
