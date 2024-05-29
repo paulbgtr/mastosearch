@@ -2,16 +2,17 @@ import Navbar from "./components/Navbar/Navbar";
 import { Search } from "./components/Search/Search";
 import { randomSearchExample } from "./lib/utils";
 import { searchExamples } from "./data/searchExamples";
+import { Footer } from "./components/Footer/Footer";
 
 function App() {
   const searchExample = randomSearchExample(searchExamples);
   return (
-    <main className="flex flex-col justify-between min-h-screen">
-      <div className="space-y-32">
+    <main>
+      <div className="min-h-screen space-y-32">
         <Navbar />
         <Search searchExample={searchExample} />
       </div>
-      <footer>test</footer>
+      <Footer />
     </main>
   );
 }
