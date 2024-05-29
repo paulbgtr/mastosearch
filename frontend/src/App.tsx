@@ -8,7 +8,7 @@ function App() {
   const searchExample = randomSearchExample(searchExamples);
   return (
     <main>
-      <div className="min-h-screen space-y-32">
+      <div className="min-h-screen pb-8 space-y-32">
         <Navbar />
         <Search searchExample={searchExample} />
       </div>
