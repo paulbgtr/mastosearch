@@ -1,6 +1,6 @@
 export default function Navbar() {
   return (
-    <header className="flex items-center justify-between w-full h-16 px-4 shadow-md md:px-6">
+    <header className="flex items-center justify-between w-full h-16 px-4 shadow-sm md:px-6">
       <a className="flex items-center gap-2 text-lg font-semibold" href="#">
         mastosearch
       </a>
