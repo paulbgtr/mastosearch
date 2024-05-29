@@ -14,6 +14,7 @@
     "@ladle/react": "^4.0.3",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-slot": "^1.0.2",
+    "@tanstack/react-query": "^5.40.0",
     "@testing-library/react": "^15.0.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
