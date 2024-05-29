@@ -2,23 +2,7 @@ import { Input } from "@/components/ui/input";
 import { useState, useRef, useEffect } from "react";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
-import { useMutation } from "@tanstack/react-query";
-
-const fetchInstances = async (query: string) => {
-  const res = await fetch("http://localhost:8080/search", {
-    method: "POST",
-    body: JSON.stringify({ query }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch");
-  }
-
-  return res.json();
-};
+import { useFetchMastodonInstances } from "@/hooks/useFetchMastodonInstances";
 
 const Header = () => {
   return (
@@ -40,27 +24,15 @@ export const Search = ({ searchExample }: { searchExample: string }) => {
     inputRef.current?.focus();
   }, []);
 
-  const mutation = useMutation({
-    mutationFn: (query: string) => fetchInstances(query),
-    onSuccess: (data) => {
-      const { instances } = data;
-
-      const filteredInstances = instances.map(
-        ({ name, id }: { name: string; id: string }) => {
-          return { name, id };
-        }
-      );
-
-      setResults(filteredInstances);
-    },
-    onError: (error) => {
-      console.error("Error fetching data:", error);
-    },
-  });
+  const mutation = useFetchMastodonInstances();
 
   const handleSubmit = () => {
     if (query.length > 0) {
-      mutation.mutate(query);
+      mutation.mutate(query, {
+        onSuccess: (data) => {
+          setResults(data);
+        },
+      });
     }
   };
 
