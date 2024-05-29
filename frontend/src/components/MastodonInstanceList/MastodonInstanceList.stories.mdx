@@ -1,0 +1,39 @@
+# MastodonInstanceList component 
+
+A wrapper component for the MastodonInstance component that displays a list of Mastodon instances.
+
+### Props
+
+- `instances` - An array of objects that represent the Mastodon instances. Each object should have the following properties:
+  - `name` - A string that represents the name of the Mastodon instance. It's also used as a link to the instance.
+  - `shortDescription` - A string that represents the short description of the Mastodon instance.
+  - `activeUsers` - A number that represents the number of active users on the Mastodon instance.
+  - `categories` - An array of strings that represents the categories of the Mastodon instance.
+  - `openRegistrations` - A boolean that represents whether the Mastodon instance has open registrations or not.
+
+> See the `MastodonInstance` type for more details.
+
+### Usage
+
+```js
+import { MastodonInstanceList } from './MastodonInstanceList';
+
+<MastodonInstanceList
+  instances={[
+    {
+      name: "Mastodon.social",
+      shortDescription: "The largest Mastodon instance",
+      activeUsers: 1000000,
+      categories: ["General", "Social"],
+      openRegistrations: true,
+    },
+    {
+      name: "Mastodon.xyz",
+      shortDescription: "A general Mastodon instance",
+      activeUsers: 500000,
+      categories: ["General", "Social"],
+      openRegistrations: true,
+    },
+  ]}
+/>
+```
