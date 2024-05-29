@@ -49,32 +49,36 @@ export const Search = ({ searchExample }: { searchExample: string }) => {
   };
 
   return (
-    <article className="grid justify-center max-w-xl gap-4 mx-auto">
-      <Header />
-      <div className="flex w-full">
-        <Input
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          ref={inputRef}
-          placeholder={searchExample}
-          className="flex-grow rounded-r-none"
-        />
-        <Button
-          onClick={handleSubmit}
-          disabled={query.length === 0}
-          className="rounded-l-none"
-        >
-          <ArrowUpIcon />
-        </Button>
-      </div>
-      {mutation.isPending && <Loading />}
-      {mutation.isError && (
-        <p className="text-center text-red-500">Error fetching data</p>
-      )}
-      {mutation.isSuccess && results.length > 0 && (
-        <MastodonInstanceList instances={results} />
-      )}
-      {mutation.isSuccess && results.length === 0 && <p>No results found</p>}
+    <article className="space-y-10">
+      <section className="grid justify-center max-w-xl gap-4 mx-auto">
+        <Header />
+        <div className="flex w-full">
+          <Input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            ref={inputRef}
+            placeholder={searchExample}
+            className="flex-grow rounded-r-none"
+          />
+          <Button
+            onClick={handleSubmit}
+            disabled={query.length === 0}
+            className="rounded-l-none"
+          >
+            <ArrowUpIcon />
+          </Button>
+        </div>
+      </section>
+      <section className="max-w-6xl mx-auto">
+        {mutation.isPending && <Loading />}
+        {mutation.isError && (
+          <p className="text-center text-red-500">Error fetching data</p>
+        )}
+        {mutation.isSuccess && results.length > 0 && (
+          <MastodonInstanceList instances={results} />
+        )}
+        {mutation.isSuccess && results.length === 0 && <p>No results found</p>}
+      </section>
     </article>
   );
 };

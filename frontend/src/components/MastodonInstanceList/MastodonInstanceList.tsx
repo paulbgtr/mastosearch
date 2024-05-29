@@ -7,7 +7,7 @@ export const MastodonInstanceList = ({
   instances: MastodonInstanceT[];
 }) => {
   return (
-    <div className="flex flex-col gap-3">
+    <div className="grid gap-3 grid-cols-3">
       {instances.map((result) => (
         <MastodonInstance
           key={result.name}
