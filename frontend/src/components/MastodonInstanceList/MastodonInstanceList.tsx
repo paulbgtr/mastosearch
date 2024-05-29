@@ -1,4 +1,3 @@
-import "src/index.css";
 import { MastodonInstance } from "../MastodonInstance/MastodonInstance";
 import { MastodonInstance as MastodonInstanceT } from "@/types/MastodonInstance";
 
