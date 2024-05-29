@@ -7,6 +7,7 @@ import type { MastodonInstance } from "@/types/MastodonInstance";
 import { fetchMastodonInstances } from "@/api/fetchMastodonInstances";
 import { MastodonInstanceList } from "../MastodonInstanceList/MastodonInstanceList";
 import { filterInstances } from "@/lib/utils";
+import { Loading } from "../Loading/Loading";
 
 const Header = () => {
   return (
@@ -66,9 +67,14 @@ export const Search = ({ searchExample }: { searchExample: string }) => {
           <ArrowUpIcon />
         </Button>
       </div>
-      {mutation.isPending && <p>Loading...</p>}
-      {mutation.isError && <p>Error fetching data</p>}
-      {mutation.isSuccess && <MastodonInstanceList instances={results} />}
+      {mutation.isPending && <Loading />}
+      {mutation.isError && (
+        <p className="text-center text-red-500">Error fetching data</p>
+      )}
+      {mutation.isSuccess && results.length > 0 && (
+        <MastodonInstanceList instances={results} />
+      )}
+      {mutation.isSuccess && results.length === 0 && <p>No results found</p>}
     </article>
   );
 };
