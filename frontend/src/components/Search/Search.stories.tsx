@@ -3,7 +3,7 @@ import { Search } from "./Search";
 import { Story } from "@ladle/react";
 import { randomSearchExample } from "@/lib/utils";
 import { searchExamples } from "@/data/searchExamples";
-import queryClient from "@/lib/QueryClient";
+import queryClient from "@/lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 
 const searchExample = randomSearchExample(searchExamples);
