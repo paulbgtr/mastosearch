@@ -6,7 +6,7 @@
  * @returns A list of Mastodon instances based on the query
  */
 export const fetchMastodonInstances = async (query: string) => {
-  const res = await fetch("http://localhost:8080/search", {
+  const res = await fetch("https://mastosearch.onrender.com/search", {
     method: "POST",
     body: JSON.stringify({ query }),
     headers: {
