@@ -10,4 +10,5 @@ export type MastodonInstance = {
   openRegistrations: boolean;
   categories: string[];
   shortDescription: string;
+  languages: string[];
 };
