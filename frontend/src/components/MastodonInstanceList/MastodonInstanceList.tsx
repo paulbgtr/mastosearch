@@ -6,11 +6,13 @@ export const MastodonInstanceList = ({
 }: {
   instances: MastodonInstanceT[];
 }) => {
+  console.log(instances);
   return (
-    <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {instances.map((result) => (
         <MastodonInstance
           key={result.name}
+          languages={result.languages}
           name={result.name}
           activeUsers={result.activeUsers}
           openRegistrations={result.openRegistrations}
