@@ -15,6 +15,17 @@ export const randomSearchExample = (examples: string[]) => {
   return examples[Math.floor(Math.random() * examples.length)];
 };
 
+type FilteredInstanceData = {
+  name: string;
+  active_users: number;
+  open_registrations: boolean;
+  info: {
+    categories: string[];
+    short_description: string;
+    languages: string[];
+  };
+};
+
 /**
  * Filter a list of Mastodon instances
  *
@@ -28,20 +39,13 @@ export const filterInstances = (instances: any) => {
       active_users,
       open_registrations,
       info,
-    }: {
-      name: string;
-      active_users: number;
-      open_registrations: boolean;
-      info: {
-        categories: string[];
-        short_description: string;
-      };
-    }) => ({
+    }: FilteredInstanceData) => ({
       name,
       activeUsers: active_users,
       openRegistrations: open_registrations,
       categories: info.categories,
       shortDescription: info.short_description,
+      languages: info.languages,
     })
   );
 };
