@@ -1,5 +1,5 @@
 import { SearchInput } from "./SearchInput";
-import { SearchControl } from "./SearchControl";
+import { SearchControl } from "./SearchControl/SearchControl";
 
 /**
  * A search bar component that contains a search input and a search control with additional styling
