@@ -15,17 +15,17 @@ const dangerOutline =
  * @returns A button that allows the user to toggle NSFW content
  */
 export const AllowNSWF = ({
-  isNSWF,
+  isNSFW,
   setIsNSFW,
 }: {
-  isNSWF: boolean;
+  isNSFW: boolean;
   setIsNSFW: (isNSFW: boolean) => void;
 }) => {
-  const variant = isNSWF ? danger : dangerOutline;
+  const variant = isNSFW ? danger : dangerOutline;
 
   return (
     <Button
-      onClick={() => setIsNSFW(!isNSWF)}
+      onClick={() => setIsNSFW(!isNSFW)}
       className={`${variant} ${baseClasses}`}
     >
       NSFW
