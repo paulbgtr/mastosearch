@@ -1,26 +1,14 @@
-import { useState, useRef, useEffect } from "react";
+import { useContext, useRef, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
-import type { MastodonInstance } from "@/types/MastodonInstance";
 import { fetchMastodonInstances } from "@/api/fetchMastodonInstances";
 import { filterInstances } from "@/lib/utils";
 import { SearchBar } from "./SearchBar/SearchBar";
 import { LoadingInstances } from "./LoadingInstances";
-
-const Header = () => {
-  return (
-    <header className="space-y-1 text-center">
-      <h1 className="font-black text-7xl">Discover Your Tribe.</h1>
-      <p className="text-lg">
-        Search for the Mastodon instance that fits you best
-      </p>
-    </header>
-  );
-};
+import { SearchContext } from "../context/SearchContext";
+import { Header } from "./Header";
 
 export const Search = ({ searchExample }: { searchExample: string }) => {
-  const [query, setQuery] = useState("");
-  const [isNSWF, setIsNSFW] = useState(false);
-  const [results, setResults] = useState<MastodonInstance[]>([]);
+  const { query, setResults } = useContext(SearchContext);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -51,16 +39,12 @@ export const Search = ({ searchExample }: { searchExample: string }) => {
       <section className="grid justify-center max-w-xl gap-4 mx-auto">
         <Header />
         <SearchBar
-          query={query}
-          setQuery={setQuery}
-          isNSWF={isNSWF}
-          setIsNSFW={setIsNSFW}
           inputRef={inputRef}
           handleSubmit={handleSubmit}
           searchExample={searchExample}
         />
       </section>
-      <LoadingInstances mutation={mutation} results={results} />
+      <LoadingInstances mutation={mutation} />
     </article>
   );
 };
