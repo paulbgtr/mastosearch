@@ -54,7 +54,9 @@ bun dev
 
 #### Ladle
 
-For those of you who want to be speedy in the kitchen, you can use the `bunx ladle serve` command to launch ladle and interact with the core components in isolation.
+For those of you who want to be speedy in the kitchen, you can use the `bun ladle` command to launch ladle and interact with the core components in isolation.
+
+In ladle, you can view the rest of the documentation related to the components and view the components in isolation.
 
 ### Backend
 
@@ -75,5 +77,5 @@ The backend is an Express app powered by bun and TypeScript. To run it, you need
 ```bash
 cd backend
 bun i
-bun run --hot server.js
+bun dev
 ```
