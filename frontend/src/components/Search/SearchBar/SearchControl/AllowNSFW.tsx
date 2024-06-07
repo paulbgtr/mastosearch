@@ -9,12 +9,12 @@ const dangerOutline =
 /**
  * A button that allows the user to toggle NSFW content
  *
- * @param isNSWF - Whether or not the user has NSFW content enabled
+ * @param isNSFW - Whether or not the user has NSFW content enabled
  * @param setIsNSFW - A function that toggles the NSFW content
  *
  * @returns A button that allows the user to toggle NSFW content
  */
-export const AllowNSWF = ({
+export const AllowNSFW = ({
   isNSFW,
   setIsNSFW,
 }: {
