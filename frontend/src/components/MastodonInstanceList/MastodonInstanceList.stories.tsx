@@ -1,3 +1,4 @@
+import "src/index.css";
 import { Story } from "@ladle/react";
 import { MastodonInstanceList } from "./MastodonInstanceList";
 import { mockedMastodonInstances } from "@/data/mockedMastodonInstances";
