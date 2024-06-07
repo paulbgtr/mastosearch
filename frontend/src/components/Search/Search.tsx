@@ -7,6 +7,15 @@ import { LoadingInstances } from "./LoadingInstances";
 import { SearchContext } from "../context/SearchContext";
 import { Header } from "./Header";
 
+/**
+ * A search component that contains a header, a search bar, and a loading instances component
+ * that fetches and displays Mastodon instances based on the search query.
+ *
+ * For additional docs and examples check the Ladle documentation.
+ *
+ * @param searchExample
+ * @returns A search component
+ */
 export const Search = ({ searchExample }: { searchExample: string }) => {
   const { query, setResults } = useContext(SearchContext);
   const inputRef = useRef<HTMLInputElement>(null);

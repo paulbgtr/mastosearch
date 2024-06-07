@@ -1,3 +1,8 @@
+/**
+ * A header component that displays the title and a description of the app.
+ *
+ * @returns A header component
+ */
 export const Header = () => {
   return (
     <header className="space-y-1 text-center">
