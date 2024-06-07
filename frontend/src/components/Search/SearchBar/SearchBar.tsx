@@ -20,7 +20,7 @@ export const SearchBar = ({
   handleSubmit: () => void;
 }) => {
   return (
-    <div className="flex-col w-full px-4 py-2 bg-gray-200 rounded-xl">
+    <div className="flex-col w-full px-4 py-2 shadow-lg rounded-xl">
       <SearchInput inputRef={inputRef} searchExample={searchExample} />
       <SearchControl handleSubmit={handleSubmit} />
     </div>
