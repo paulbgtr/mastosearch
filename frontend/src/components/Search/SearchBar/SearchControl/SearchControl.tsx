@@ -16,18 +16,27 @@ export const SearchControl = ({
 }: {
   handleSubmit: () => void;
 }) => {
-  const { query, isNSFW, setIsNSFW } = useContext(SearchContext);
+  const { query, isNSFW, setIsNSFW, isAI, setIsAI } = useContext(SearchContext);
   return (
     <div className="flex justify-between mt-3">
-      <AllowNSFW isNSFW={isNSFW} setIsNSFW={setIsNSFW} />
-      <Button
-        title="Search"
-        onClick={handleSubmit}
-        disabled={query.length === 0}
-        variant={"ghost"}
-      >
-        <ArrowUpIcon />
-      </Button>
+      {isAI ? (
+        <AllowNSFW isNSFW={isNSFW} setIsNSFW={setIsNSFW} />
+      ) : (
+        <span></span>
+      )}
+      <div className="flex gap-2">
+        <Button onClick={() => setIsAI(!isAI)} variant="outline">
+          {isAI ? "No AI" : "AI"}
+        </Button>
+        <Button
+          title="Search"
+          onClick={handleSubmit}
+          disabled={query.length === 0}
+          variant={"ghost"}
+        >
+          <ArrowUpIcon />
+        </Button>
+      </div>
     </div>
   );
 };

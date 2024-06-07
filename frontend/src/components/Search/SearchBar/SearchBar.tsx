@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import { SearchInput } from "./SearchInput";
 import { SearchControl } from "./SearchControl/SearchControl";
+import { SearchContext } from "@/components/context/SearchContext";
 
 /**
  * A search bar component that contains a search input and a search control with additional styling
@@ -19,9 +21,16 @@ export const SearchBar = ({
   searchExample: string;
   handleSubmit: () => void;
 }) => {
+  const { isAI } = useContext(SearchContext);
+
   return (
     <div className="flex-col w-full px-4 py-2 shadow-lg rounded-xl">
-      <SearchInput inputRef={inputRef} searchExample={searchExample} />
+      {isAI ? (
+        <SearchInput inputRef={inputRef} searchExample={searchExample} />
+      ) : (
+        // todo
+        <div></div>
+      )}
       <SearchControl handleSubmit={handleSubmit} />
     </div>
   );
