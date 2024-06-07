@@ -14,6 +14,6 @@ describe("MastodonInstanceList", () => {
   it("renders the MastodonInstanceList with correct number of instances", () => {
     render(<MastodonInstanceList instances={mockedMastodonInstances} />);
     const instances = screen.getAllByText(/Visit/i);
-    expect(instances.length).toBe(2);
+    expect(instances.length).toBe(3);
   });
 });
