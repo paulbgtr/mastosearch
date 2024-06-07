@@ -37,6 +37,11 @@ describe("Navbar", () => {
 
   it("should render the search Button", () => {
     renderWithProvider(<Search searchExample="Search..." />);
-    screen.getByRole("button");
+    screen.getByTitle("Search");
+  });
+
+  it("should render the NSFW Button", () => {
+    renderWithProvider(<Search searchExample="Search..." />);
+    screen.getByText("NSFW");
   });
 });

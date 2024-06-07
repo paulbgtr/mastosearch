@@ -21,10 +21,10 @@ export const SearchControl = ({
     <div className="flex justify-between mt-3">
       <AllowNSWF isNSFW={isNSFW} setIsNSFW={setIsNSFW} />
       <Button
+        title="Search"
         onClick={handleSubmit}
         disabled={query.length === 0}
         variant={"ghost"}
-        className=""
       >
         <ArrowUpIcon />
       </Button>
