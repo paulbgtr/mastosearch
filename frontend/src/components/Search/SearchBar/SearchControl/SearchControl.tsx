@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AllowNSWF } from "./AllowNSFW";
+import { AllowNSFW } from "./AllowNSFW";
 import { Button } from "@/components/ui/button";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
 import { SearchContext } from "../../../context/SearchContext";
@@ -19,7 +19,7 @@ export const SearchControl = ({
   const { query, isNSFW, setIsNSFW } = useContext(SearchContext);
   return (
     <div className="flex justify-between mt-3">
-      <AllowNSWF isNSFW={isNSFW} setIsNSFW={setIsNSFW} />
+      <AllowNSFW isNSFW={isNSFW} setIsNSFW={setIsNSFW} />
       <Button
         title="Search"
         onClick={handleSubmit}
