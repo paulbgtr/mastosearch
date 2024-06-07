@@ -8,6 +8,7 @@ export default function Navbar() {
       </a>
       <nav className="flex items-center gap-4 sm:gap-6">
         <a
+          title="Github repository"
           className="text-sm font-medium transition-colors hover:text-gray-900 dark:hover:text-gray-50"
           href="https://github.com/paulbgtr/mastosearch"
         >

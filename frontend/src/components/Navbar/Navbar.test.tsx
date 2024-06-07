@@ -12,7 +12,7 @@ describe("Navbar", () => {
 
   it("contains a single link to the Github repository", () => {
     render(<Navbar />);
-    const githubLink = screen.getByText("Github");
+    const githubLink = screen.getByTitle("Github repository");
     expect(githubLink.getAttribute("href")).toBe(
       "https://github.com/paulbgtr/mastosearch"
     );
