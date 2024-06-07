@@ -1,14 +1,16 @@
 import { createContext, useState } from "react";
 import type { MastodonInstance } from "@/types/MastodonInstance";
 
-export const SearchContext = createContext<{
+type SearchContextProps = {
   results: MastodonInstance[];
   setResults: (results: MastodonInstance[]) => void;
   query: string;
   setQuery: (query: string) => void;
   isNSFW: boolean;
   setIsNSFW: (isNSFW: boolean) => void;
-}>({
+};
+
+export const SearchContext = createContext<SearchContextProps>({
   results: [],
   setResults: () => {},
   query: "",
