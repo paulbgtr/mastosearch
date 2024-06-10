@@ -1,7 +1,7 @@
 import { Request, Response, Next } from "express";
 import { categories } from "../data/categories";
 import { getCategoryFromChatGpt } from "../api/chatGptApi";
-import { getInstancesByCategory } from "../api/mastodonInstancesApi";
+import { MastodonInstancesAPI } from "../api/mastodonInstancesApi";
 import { BadRequestError } from "../utils/CustomError";
 
 const openaiApiKey = process.env.OPENAI_API_KEY;
@@ -10,6 +10,8 @@ const mastodonInstancesApiKey = process.env.MASTODON_INSTANCES_API_KEY;
 if (!openaiApiKey || !mastodonInstancesApiKey) {
   throw new Error("API keys not provided");
 }
+
+const mastodonInstancesAPI = new MastodonInstancesAPI(mastodonInstancesApiKey);
 
 /**
  * A handler that searches for Mastodon instances based on a user query.
@@ -38,10 +40,8 @@ export const searchHandler = async (
       categories
     );
 
-    const instances = await getInstancesByCategory(
-      mastodonInstancesApiKey,
-      category
-    );
+    const instances =
+      await mastodonInstancesAPI.getInstancesByCategory(category);
     res.json({ instances });
   } catch (err) {
     next(err);

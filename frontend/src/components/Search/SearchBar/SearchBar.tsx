@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { SearchInput } from "./SearchInput";
 import { SearchControl } from "./SearchControl/SearchControl";
 import { SearchContext } from "@/components/context/SearchContext";
+import { SearchFilter } from "./SearchFilter/SearchFilter";
 
 /**
  * A search bar component that contains a search input and a search control with additional styling
@@ -28,8 +29,7 @@ export const SearchBar = ({
       {isAI ? (
         <SearchInput inputRef={inputRef} searchExample={searchExample} />
       ) : (
-        // todo
-        <div></div>
+        <SearchFilter />
       )}
       <SearchControl handleSubmit={handleSubmit} />
     </div>
