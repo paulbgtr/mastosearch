@@ -31,7 +31,7 @@ export const SearchControl = ({
         <Button
           title="Search"
           onClick={handleSubmit}
-          disabled={query.length === 0}
+          disabled={query.length === 0 && isAI}
           variant={"ghost"}
         >
           <ArrowUpIcon />
