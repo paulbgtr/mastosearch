@@ -1,6 +1,6 @@
 import { useContext, useRef, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { fetchMastodonInstances } from "@/api/fetchMastodonInstances";
+import { fetchMastodonInstancesAI } from "@/api/fetchMastodonInstancesAI";
 import { filterInstances } from "@/lib/utils";
 import { SearchBar } from "./SearchBar/SearchBar";
 import { LoadingInstances } from "./LoadingInstances";
@@ -25,7 +25,7 @@ export const Search = ({ searchExample }: { searchExample: string }) => {
   }, []);
 
   const mutation = useMutation({
-    mutationFn: fetchMastodonInstances,
+    mutationFn: fetchMastodonInstancesAI,
     onSuccess: (data) => {
       const { instances } = data;
 
