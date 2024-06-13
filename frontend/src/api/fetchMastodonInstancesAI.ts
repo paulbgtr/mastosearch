@@ -1,12 +1,11 @@
 /**
- * A function that handles the main integration with the backend.
- * It fetches the search API which provides a list of Mastodon instances based on the query.
+ * A function that fetches the search API which provides a list of Mastodon instances based on the query.
  *
  * @param query
  * @returns A list of Mastodon instances based on the query
  */
-export const fetchMastodonInstances = async (query: string) => {
-  const res = await fetch("https://mastosearch.onrender.com/search", {
+export const fetchMastodonInstancesAI = async (query: string) => {
+  const res = await fetch("http://localhost:8080/search", {
     method: "POST",
     body: JSON.stringify({ query }),
     headers: {
